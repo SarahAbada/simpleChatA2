@@ -69,12 +69,14 @@ public class EchoServer extends AbstractServer
     			String mssWuid = "Message received: "+message +"from "+(String)client.getInfo("Login id");
     			System.out.println(mssWuid);
     			
+    			
     			// next step: add their login id to their user info
     			String[] parts = message.split("[<>]");
     			if (parts.length>=2) {
     				String theUid = parts[1];
     				client.setInfo("Login id",theUid);
     				// i also need to send the login messages
+    				System.out.println("<"+client.getInfo("Login id")+">"+" has logged on");
     				sendToAllClients("<"+client.getInfo("Login id")+">"+" has logged on");
     			}
     			else {
