@@ -196,7 +196,7 @@ public class ClientConsole implements ChatIF
     	uid = args[0];
     }
     catch(ArrayIndexOutOfBoundsException e) {
-    	System.out.println("Error: cannot connect to server without user id");
+    	System.out.println("ERROR - No login ID specified. Connection aborted.");
     	System.exit(1);
     }
     try
