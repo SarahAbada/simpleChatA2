@@ -63,10 +63,19 @@ public class EchoServer extends AbstractServer
 				}
     			
     		} else {
+    			// the user is doing a new login
+    			System.out.println("A new client has connected to the server.");
+    			// first step: send the message as you do with all messages
+    			String mssWuid = "Message received: "+message +"from "+(String)client.getInfo("Login id");
+    			System.out.println(mssWuid);
+    			
+    			// next step: add their login id to their user info
     			String[] parts = message.split("[<>]");
     			if (parts.length>=2) {
     				String theUid = parts[1];
     				client.setInfo("Login id",theUid);
+    				// i also need to send the login messages
+    				sendToAllClients("<"+client.getInfo("Login id")+">"+" has logged on");
     			}
     			else {
     				System.out.println("Invalid login format. Use #login<your_id>");
@@ -77,8 +86,11 @@ public class EchoServer extends AbstractServer
     	else {
     		if (client.getInfo("Login id") != null) {
     			// append uid to message and echo to all clients
-        		String msgWuid = "["+(String)client.getInfo("Login id")+"]: " + message;
-        		sendToAllClients(msgWuid);
+    			String mssWuid = "Message received: "+message +"from "+(String)client.getInfo("Login id");
+    			sendToAllClients(mssWuid);
+    			
+        		//String msgWuid = "["+(String)client.getInfo("Login id")+"]: " + message;
+        		//sendToAllClients(msgWuid);
     		} else {
     			try {
 					client.sendToClient("Error: you must be logged in to send messages.");
