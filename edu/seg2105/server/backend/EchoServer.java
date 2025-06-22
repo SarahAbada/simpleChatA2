@@ -88,9 +88,9 @@ public class EchoServer extends AbstractServer
     	else {
     		if (client.getInfo("Login id") != null) {
     			// append uid to message and echo to all clients
-    			String mssWuid = "Message received: "+message +"from "+(String)client.getInfo("Login id");
+    			String mssWuid = (String)client.getInfo("Login id")+" "+message;
     			sendToAllClients(mssWuid);
-    			
+    			System.out.println("Message received:<"+message+"> from "+(String)client.getInfo("Login id"));
         		//String msgWuid = "["+(String)client.getInfo("Login id")+"]: " + message;
         		//sendToAllClients(msgWuid);
     		} else {
