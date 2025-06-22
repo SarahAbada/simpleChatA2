@@ -137,7 +137,7 @@ public class EchoServer extends AbstractServer
   @Override
   synchronized protected void clientDisconnected(ConnectionToClient client) {
 	  // print out a nice message
-	  System.out.println("[Server] Client connected from: " + client.getInetAddress().getHostAddress());
+	  System.out.println("[Server] Client disconnected from: " + client.getInetAddress().getHostAddress());
   }
   
   
