@@ -144,6 +144,7 @@ public class ServerConsole implements ChatIF{
 	        	}
 	        } else {
 	        	server.sendToAllClients("SERVER MSG >" + message);
+	        	System.out.println("SERVER MSG >" + message);
 	        }
 	        
 	      }
