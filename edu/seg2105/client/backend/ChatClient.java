@@ -29,6 +29,8 @@ public class ChatClient extends AbstractClient
   ChatIF clientUI; 
   
   String uid;
+  
+  private boolean isQuitting;
 
   
   //Constructors ****************************************************
@@ -47,6 +49,7 @@ public class ChatClient extends AbstractClient
     super(host, port); //Call the superclass constructor
     this.uid=uid;
     this.clientUI = clientUI;
+    this.setQuitting(false);
     openConnection();
   }
 
@@ -105,13 +108,30 @@ public class ChatClient extends AbstractClient
   
   @Override
   protected void connectionClosed() {
-	clientUI.display("The server has shut down");
-	System.exit(0);
+	  
+	if (isQuitting()) {
+		clientUI.display("Connection closed");
+	}else {
+		clientUI.display("The server has shut down");
+	}
+	
+	
   }
   @Override
   protected void connectionException(Exception exception) {
-	clientUI.display("The server has shut down unexpectedly");
+	clientUI.display("The server has shut down");
 	System.exit(0);
+	
+  }
+
+
+  public boolean isQuitting() {
+	return isQuitting;
+  }
+
+
+  public void setQuitting(boolean isQuitting) {
+	this.isQuitting = isQuitting;
   }
 }
 //End of ChatClient class
