@@ -98,6 +98,7 @@ public class ServerConsole implements ChatIF{
 	        	}
 	        	else if (message.startsWith("#close")) {
 	        		try {
+	        			//server.sendToAllClients("The server has shut down")
 	        			server.close();
 	        			isClosed = true;
 	        		}
