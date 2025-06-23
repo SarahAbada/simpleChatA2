@@ -67,6 +67,8 @@ public class ClientConsole implements ChatIF
     
     // Create scanner object to read from console
     fromConsole = new Scanner(System.in); 
+    
+    
   }
 
   
@@ -89,13 +91,25 @@ public class ClientConsole implements ChatIF
         if (message.startsWith("#")) {
         	if (message.startsWith("#quit")) {
         		// code to quit
-        		client.quit();
+        		client.setQuitting(true);
+        		try {
+        			client.closeConnection();
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
+        		
+        		System.exit(0);
+        		
+        		
+        		
+        		//client.quit();
         		// note that this already checks if the client is disconnected
         		// because of how quit() and closeConnection() work
         	}
         	else if (message.startsWith("#logoff")) {
         		// code do disconnect the client 
         		// without quitting 
+        		client.setQuitting(true);
         		try {
         			client.closeConnection();
         		}
